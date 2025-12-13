@@ -1,5 +1,5 @@
 ﻿xlrd==2.0.2
 pandas==1.5.2
 plotly==5.17.0
-seaborn==0.12.1
 streamlit==1.15.1
+
