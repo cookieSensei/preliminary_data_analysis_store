@@ -1,3 +1,14 @@
+# 📊 Jumbo & Company - Device Insurance Attach Rate Analysis
+
+**Data Science Internship Assignment Submission**
+
+**Candidate**: Ashish Chaudhary
+
+**Live Dashboard**: https://preliminarydataanalysisstore.streamlit.app/
+
+
+
+
 Jumbo & Company
 Device Insurance Attach Rate Analysis
 Data Science Internship Assignment
