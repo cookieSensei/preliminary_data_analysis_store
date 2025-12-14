@@ -3,88 +3,19 @@ Device Insurance Attach Rate Analysis
 Data Science Internship Assignment
 December 2025
 
-1. Introduction
+
 This report presents a comprehensive analysis of device insurance attach rates across Jumbo & Company stores. The analysis covers 163 stores across 6 branches over a 5-month period (August to December 2025). The primary objective is to understand performance trends, identify top and bottom performers, and forecast future attach rates.
-2. Dataset Overview
-Dataset Summary:
-• Total Stores: 163
-• Branches: 6
-• Time Period: 5 months (Aug-Dec 2025)
-• Attach Rate Range: 0.0% - 62.2%
-• Branches: Delhi_Ncr, Pune, Gujarat, Thane, Telangana, Mumbai
 
-3. Data Processing Code
-Import Libraries and Load Data:
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.linear_model import LinearRegression
-
-# Load data
-df = pd.read_excel('Jumbo-Company_-Attach.xls')
-months = ['Dec', 'Nov', 'Oct', 'Sep', 'Aug']
-df[months] = df[months].astype(float)
-
-# Derived metrics
-df['Avg_5M'] = df[months].mean(axis=1) * 100
-df['Change_Nov_Dec'] = (df['Dec'] - df['Nov']) * 100
-
-print(f'📊 Dataset: {len(df)} stores, {len(df["Branch"].unique())} branches')
-print(f'📈 Performance Range: {df["Avg_5M"].min():.1f}% - {df["Avg_5M"].max():.1f}%')
-print(f'🏢 Branches: {", ".join(df["Branch"].unique())}')
-
-4. Monthly Performance Trend
-Code to generate monthly trend chart:
-# Monthly trend analysis
-monthly_avg = df[months].mean() * 100
-
-plt.figure(figsize=(10, 6))
-plt.plot(months[::-1], monthly_avg.values[::-1], marker='o', linewidth=2, markersize=8)
-plt.title('Monthly Attach Rate Trend (Aug-Dec 2025)', fontsize=14, fontweight='bold')
-plt.ylabel('Attach Rate (%)')
-plt.xlabel('Month')
-plt.grid(True, alpha=0.3)
-plt.xticks(rotation=45)
-for i, v in enumerate(monthly_avg.values[::-1]):
-    plt.annotate(f'{v:.1f}%', (i, v), textcoords="offset points", xytext=(0,10), ha='center')
-plt.tight_layout()
-plt.show()
+# Monthly attach rate
  <img width="975" height="581" alt="image" src="https://github.com/user-attachments/assets/c1497beb-6667-46eb-b015-021ae954237c" />
 
 
-5. Branch Performance Analysis
-Code to generate branch performance chart:
-# Branch-wise performance
-branch_perf = df.groupby('Branch')[months].mean().mean(axis=1).sort_values(ascending=False) * 100
+# Branch Performance Analysis
+<img width="975" height="483" alt="image" src="https://github.com/user-attachments/assets/2bdf02d8-cc28-4023-b6f3-875ef3ccaa94" />
 
-plt.figure(figsize=(12, 6))
-branch_perf.plot(kind='bar')
-plt.title('Average Attach Rate by Branch (Aug-Dec)', fontsize=14, fontweight='bold')
-plt.ylabel('Average Attach Rate (%)')
-plt.xlabel('Branch')
-plt.xticks(rotation=45, ha='right')
-for i, v in enumerate(branch_perf):
-    plt.text(i, v + 0.5, f'{v:.1f}%', ha='center', fontweight='bold')
-plt.grid(True, alpha=0.3)
-plt.tight_layout()
-plt.show()
- 
 
-6. Top 10 Performing Stores
-Code to generate top 10 stores chart:
 # Top 10 stores
-top_10 = df.nlargest(10, 'Avg_5M')[['Store_Name', 'Branch', 'Avg_5M']].sort_values('Avg_5M')
 
-plt.figure(figsize=(12, 8))
-plt.barh(top_10['Store_Name'], top_10['Avg_5M'], color='#3498db')
-plt.xlabel('Average Attach Rate (%)')
-plt.title('Top 10 Stores - 5 Month Average', fontsize=14, fontweight='bold')
-for i, v in enumerate(top_10['Avg_5M']):
-    plt.text(v + 1, i, f'{v:.1f}%', va='center', fontweight='bold')
-plt.grid(True, alpha=0.3, axis='x')
-plt.tight_layout()
-plt.show()
  
 
 7. Bottom 10 Performing Stores
